@@ -1,0 +1,26 @@
+rescript = 1
+g_finger := /Users/aw/workspace/thousand-beats/node_modules/@rescript/react/lib/ocaml/install.stamp
+g_finger := /Users/aw/workspace/thousand-beats/node_modules/bs-css/lib/ocaml/install.stamp
+g_finger := /Users/aw/workspace/thousand-beats/node_modules/bs-css-emotion/lib/ocaml/install.stamp
+g_finger := /Users/aw/workspace/thousand-beats/node_modules/@ryyppy/rescript-promise/lib/ocaml/install.stamp
+rule astj
+  command = /Users/aw/workspace/thousand-beats/node_modules/rescript/darwin/bsc.exe  -bs-v 9.1.4,1661374702.23 -ppx /Users/aw/workspace/thousand-beats/node_modules/@davesnx/styled-ppx/ppx -bs-jsx 3  -absname -bs-ast -o $out $i
+o src/renderer/App.ast : astj ../../src/renderer/App.res
+rule deps
+  command = /Users/aw/workspace/thousand-beats/node_modules/rescript/darwin/bsb_helper.exe -hash 24a1191e859479b64cb3af761e4588ea $in
+  restat = 1
+o src/renderer/App.d : deps src/renderer/App.ast
+rule mij
+  command = /Users/aw/workspace/thousand-beats/node_modules/rescript/darwin/bsc.exe -I src/renderer -I src/__tests__ -I src/main -I src/assets -I src -I /Users/aw/workspace/thousand-beats/node_modules/@rescript/react/lib/ocaml -I /Users/aw/workspace/thousand-beats/node_modules/bs-css/lib/ocaml -I /Users/aw/workspace/thousand-beats/node_modules/bs-css-emotion/lib/ocaml -I /Users/aw/workspace/thousand-beats/node_modules/@ryyppy/rescript-promise/lib/ocaml   -bs-package-name thousand-beats -bs-package-output es6:$in_d:.bs.js -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/renderer/App.cmj src/renderer/App.cmi ../../src/renderer/App.bs.js : mij src/renderer/App.ast
+o src/renderer/Chime.ast : astj ../../src/renderer/Chime.res
+o src/renderer/Chime.d : deps src/renderer/Chime.ast
+o src/renderer/Chime.cmj src/renderer/Chime.cmi ../../src/renderer/Chime.bs.js : mij src/renderer/Chime.ast
+o src/renderer/Counter.ast : astj ../../src/renderer/Counter.res
+o src/renderer/Counter.d : deps src/renderer/Counter.ast
+o src/renderer/Counter.cmj src/renderer/Counter.cmi ../../src/renderer/Counter.bs.js : mij src/renderer/Counter.ast
+o src/renderer/Controls.ast : astj ../../src/renderer/Controls.res
+o src/renderer/Controls.d : deps src/renderer/Controls.ast
+o src/renderer/Controls.cmj src/renderer/Controls.cmi ../../src/renderer/Controls.bs.js : mij src/renderer/Controls.ast
